@@ -1,5 +1,6 @@
 package com.javaeeee.FullStackProject;
 
+import com.javaeeee.FullStackProject.resources.ItemResource;
 import com.javaeeee.FullStackProject.resources.ProfileResource;
 
 import io.dropwizard.Application;
@@ -26,6 +27,7 @@ public class FullStackProjectApplication extends Application<FullStackProjectCon
     public void run(final FullStackProjectConfiguration configuration,
                     final Environment environment) {
         environment.jersey().register(new ProfileResource());
+        environment.jersey().register(new ItemResource());
     }
 
 }

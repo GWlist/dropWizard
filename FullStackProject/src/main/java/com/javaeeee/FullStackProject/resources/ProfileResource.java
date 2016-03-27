@@ -16,14 +16,14 @@ public class ProfileResource {
 	    // retrieve information about the profile with the provided id
 	    // ...
 	    return Response
-	        .ok(new Profile(userid, "Test", "User", 5))
+	        .ok(new Profile(userid, "Test", "User", 5, "555-555-5555", "user@test.com"))
 	        .build();
 	  }
 	  
 	  @POST
 	  public Response createProfile(
 	      Profile profile) {
-	    // store the new contact 
+	    // store the new profile 
 	    // ...
 	    return Response
 	        .created(null)

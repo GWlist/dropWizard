@@ -1,7 +1,10 @@
 package com.javaeeee.FullStackProject.representations;
 
+import org.mongodb.morphia.annotations.Id;
+
 public class Profile {
 
+	@Id
 	private final String userid;
 	private final String firstName;
 	private final String lastName;

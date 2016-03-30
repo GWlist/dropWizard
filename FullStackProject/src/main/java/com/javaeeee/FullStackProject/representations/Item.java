@@ -1,7 +1,11 @@
 package com.javaeeee.FullStackProject.representations;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
 
+@Entity
 public class Item {
 
+	@Id
 	private final String itemid;
 	private final String name;
 	private final int price;

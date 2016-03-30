@@ -38,7 +38,7 @@ public class FullStackProjectApplication extends Application<FullStackProjectCon
     	MongoClient mongoClient = new MongoClient("localhost", 27017);
     	environment.lifecycle().manage(new MongoClientManager(mongoClient));
         environment.jersey().register(new ProfileResource(mongoClient));
-        environment.jersey().register(new ItemResource());
+        environment.jersey().register(new ItemResource(mongoClient));
     }
 
 }

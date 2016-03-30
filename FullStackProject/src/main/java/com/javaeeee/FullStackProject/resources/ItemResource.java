@@ -17,7 +17,6 @@ public class ItemResource {
 
 	public ItemResource(final MongoClient mongoClient) {
 		Morphia morphia = new Morphia();
-		morphia.map(Item.class);
 		datastore = new Morphia().createDatastore(mongoClient, "gwlist");
 
 	}

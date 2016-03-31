@@ -18,7 +18,7 @@ public class ProfileResource {
 	
 	  public ProfileResource(final MongoClient mongoClient) {
 	    
-	   datastore = new Morphia().createDatastore(mongoClient, "testdb");
+	   datastore = new Morphia().createDatastore(mongoClient, "gwlist");
 	    
 	  }
 	  

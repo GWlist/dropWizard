@@ -31,12 +31,22 @@ public class ItemResource {
 	        .build();
 	  }
 
+	
+	/*curl -H "Content-Type: application/json" -X POST -d '{"itemid": "20", "name": "Test Item", "price" :100, "numSold": 1, "location": "DC", "userid":"15"}' 
+     http://localhost:9000/service/items/create
+    */
+
+
+
 	@POST
 	@Path("create")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createItem(Item item) {
 		// store a new item
-		datastore.save(item);
+		
+		ItemDAO itemDAO = new ItemDAO(Item.class, datastore);
+        itemDAO.saveItem(item, datastore);
+		//datastore.save(item);
 		return Response
 				.created(null)
 				.build();

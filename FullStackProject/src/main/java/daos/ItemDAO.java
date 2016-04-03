@@ -18,6 +18,11 @@ public class ItemDAO extends BasicDAO<Item, String> {
         return get(itemId);
     }
 
+    
+    public void saveItem(Item item, Datastore ds) {
+    	ds.save(item);
+    }
+    
     public boolean updateItem(Item item){
 
         Query<Item> q = createQuery().filter("_id =", item.getItemid());

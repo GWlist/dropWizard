@@ -79,6 +79,12 @@
             <version>0.109</version>
         </dependency>
         
+        <dependency>
+            <groupId>com.javaeeee</groupId>
+            <artifactId>FullStackProject-lib</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        
         <!-- Optional Jars (for certain features) but required by maven for building. -->
         <dependency>
             <groupId>cglib</groupId>

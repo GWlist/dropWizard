@@ -3,31 +3,39 @@ package com.javaeeee.FullStackProject.resources;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 
-import com.javaeeee.FullStackProject.representations.Item;
+import com.javaeeee.FullStackProject.representations.ItemJson;
+import com.javaeeee.api.GWListApi;
+import com.javaeeee.dao.ItemDAOImpl;
+import com.javaeeee.dao.ItemDaoException;
+import com.javaeeee.dao.ItemDAO;
 import com.mongodb.MongoClient;
-import daos.ItemDAO;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
+import com.javaeeee.entities.Item;
+
 
 @Path("/items")
 @Produces(MediaType.APPLICATION_JSON)
 public class ItemResource {
 
 	private Datastore datastore;
+	private GWListApi api;
 
 	public ItemResource(final MongoClient mongoClient) {
-		Morphia morphia = new Morphia();
-		datastore = new Morphia().createDatastore(mongoClient, "gwlist");
 
+		datastore = new Morphia().createDatastore(mongoClient, "gwlist");
+        ItemDAO itemDAO = new ItemDAOImpl(Item.class, datastore);
+        GWListApi api = new GWListApi(itemDAO);
+        this.api = api;
 	}
 
 	@GET
 	@Path("/{itemid}")
-	  public Response getItem(@PathParam("itemid") String itemid) {
+	  public Response getItem(@PathParam("itemid") String itemid) throws ItemDaoException {
 	    // retrieve information about the item with the provided id
-		ItemDAO itemDAO = new ItemDAO(Item.class, datastore);
+		//ItemDAO itemDAO = new ItemDAOImpl(Item.class, datastore);
 	    return Response
-	        .ok(itemDAO.getItem(itemid))
+	        .ok(api.getItem(itemid))
 	        .build();
 	  }
 
@@ -41,12 +49,13 @@ public class ItemResource {
 	@POST
 	@Path("create")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createItem(Item item) {
+	public Response createItem(ItemJson json) throws ItemDaoException {
 		// store a new item
-		
-		ItemDAO itemDAO = new ItemDAO(Item.class, datastore);
-        itemDAO.saveItem(item, datastore);
+	    Item item = json.asItem();
+		//ItemDAO itemDAO = new ItemDAO(Item.class, datastore);
+        //itemDAO.saveItem(item, datastore);
 		//datastore.save(item);
+		api.saveItem(item, datastore);
 		return Response
 				.created(null)
 				.build();
@@ -55,10 +64,14 @@ public class ItemResource {
 	@PUT
 	@Path("update")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response updateItem(Item item) {
+	public Response updateItem(ItemJson json) throws ItemDaoException{
 		// store a new item
-		ItemDAO itemDAO = new ItemDAO(Item.class, datastore);
-		boolean update = itemDAO.updateItem(item);
+		
+		Item item = json.asItem();
+		
+		
+		//ItemDAO itemDAO = new ItemDAO(ItemJson.class, datastore);
+		boolean update = api.updateItem(item);
 
 		return ( (update)? Response.ok(null).build() :
 				Response.notModified().build());

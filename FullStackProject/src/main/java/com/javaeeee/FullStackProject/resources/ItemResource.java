@@ -81,9 +81,9 @@ public class ItemResource {
 	@DELETE
 	@Path("/{itemid}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response deleteContact(@PathParam("itemid") String itemid) {
+	public Response deleteContact(@PathParam("itemid") String itemid) throws ItemDaoException {
 		
-		
+		api.deleteItem(itemid);
 		
 		return Response
 			      .noContent()

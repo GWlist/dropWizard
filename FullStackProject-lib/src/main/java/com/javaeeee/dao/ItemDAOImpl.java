@@ -23,6 +23,11 @@ public class ItemDAOImpl extends BasicDAO<Item, String> implements ItemDAO {
 		ds.save(item);
 
 	}
+	
+	public void deleteItem(String itemid) throws ItemDaoException {
+		 
+		getDatastore().delete(itemid);
+	}
 
 	public boolean updateItem(Item item) throws ItemDaoException {
 		Query<Item> q = createQuery().filter("_id =", item.getItemid());

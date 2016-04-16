@@ -22,7 +22,9 @@ public class GWListApi {
         this.profileDao = dao;
     }
 	
-	
+	public void deleteItem(String itemid) throws ItemDaoException {
+		itemDao.deleteItem(itemid);
+	}
 	
 	
 	public Item getItem(String itemid) throws ItemDaoException {

@@ -14,5 +14,5 @@ public interface ItemDAO  {
 	
 	boolean updateItem(Item item) throws ItemDaoException;
 	
-	
+	public void deleteItem(String itemid) throws ItemDaoException;
 }

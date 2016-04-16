@@ -25,6 +25,7 @@ public class FullStackProjectApplication extends Application<FullStackProjectCon
     @Override
     public void initialize(final Bootstrap<FullStackProjectConfiguration> bootstrap) {
  
+    	 // Call HTML page
     	 AssetsBundle bundle = new AssetsBundle("/html", "/");
     	 bootstrap.addBundle(bundle);
 

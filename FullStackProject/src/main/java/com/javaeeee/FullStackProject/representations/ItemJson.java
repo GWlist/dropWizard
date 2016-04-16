@@ -1,7 +1,4 @@
 package com.javaeeee.FullStackProject.representations;
-import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Id;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.javaeeee.entities.Item;
 

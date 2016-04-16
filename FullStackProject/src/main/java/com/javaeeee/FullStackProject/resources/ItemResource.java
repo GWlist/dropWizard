@@ -78,5 +78,18 @@ public class ItemResource {
 
 	}
 	
+	@DELETE
+	@Path("/{itemid}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response deleteContact(@PathParam("itemid") String itemid) {
+		
+		
+		
+		return Response
+			      .noContent()
+			      .build();
+		
+	}
+	
 	
 }

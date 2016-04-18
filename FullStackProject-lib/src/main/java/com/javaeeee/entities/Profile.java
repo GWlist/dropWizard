@@ -12,6 +12,7 @@ public class Profile {
 	public final String lastName;
 	public final String phoneNumber;
 	public final String email;
+	public final Address address;
 	public final int rating;
 	
 	public Profile() {
@@ -21,15 +22,17 @@ public class Profile {
 	    this.rating = 0;
 	    this.phoneNumber = null;
 	    this.email = null;
+	    this.address = null;
 	  }
 	
-	public Profile(String userid, String firstName, String lastName,int rating, String phoneNumber, String email) {
+	public Profile(String userid, String firstName, String lastName,int rating, String phoneNumber, String email, Address address) {
 	    this.userid= userid;
 	    this.firstName = firstName;
 	    this.lastName = lastName;
 	    this.rating = rating;
 	    this.phoneNumber = phoneNumber;
 	    this.email = email;
+	    this.address = address;
 	  }
 
 	public String getUserid() {
@@ -54,6 +57,10 @@ public class Profile {
 
 	public int getRating() {
 		return rating;
+	}
+
+	public Address getAddress() {
+		return address;
 	}
 	
 	

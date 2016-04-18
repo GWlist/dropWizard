@@ -14,4 +14,6 @@ public interface ProfileDAO  {
 	
 	boolean updateProfile(Profile profile) throws ProfileDaoException;
 	
+	public void deleteProfile(String userid) throws ProfileDaoException;
+	
 }

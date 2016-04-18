@@ -27,5 +27,10 @@ public class ProfileDAOImpl extends BasicDAO<Profile, String> implements Profile
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	public void deleteProfile(String userid) throws ProfileDaoException {
+		 
+		getDatastore().delete(userid);
+	}
 
 }

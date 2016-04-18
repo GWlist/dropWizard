@@ -1,7 +1,7 @@
 package com.javaeeee.FullStackProject.representations;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.javaeeee.entities.Item;
+import com.javaeeee.entities.Address;
 import com.javaeeee.entities.Profile;
 
 public class ProfileJson {
@@ -13,6 +13,7 @@ public class ProfileJson {
 	private String phoneNumber;
 	private String email;
 	private int rating;
+	private Address address;
 	
 	public ProfileJson(Profile p) {
 		this.userid = p.userid;
@@ -21,12 +22,13 @@ public class ProfileJson {
 		this.phoneNumber = p.phoneNumber;
 		this.email = p.email;
 		this.rating = p.rating;
+		this.address = p.address;
 	}
 	
 	public ProfileJson() {}
 	
 	public Profile asProfile() {
-		return new Profile(userid, firstName, lastName, rating, phoneNumber, email);
+		return new Profile(userid, firstName, lastName, rating, phoneNumber, email, new Address(address.toString()));
 	}
 	
 	
@@ -55,7 +57,11 @@ public class ProfileJson {
 	public String getEmail() {
 		return email;
 	}
-	
+    @JsonProperty
+    public Address getAddress() {
+		return address;
+	}
+
 	
 	
 }

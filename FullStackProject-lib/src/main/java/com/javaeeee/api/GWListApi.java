@@ -1,13 +1,18 @@
 package com.javaeeee.api;
 
+import java.util.List;
+
 import org.mongodb.morphia.Datastore;
 
 import com.javaeeee.dao.ItemDAO;
 import com.javaeeee.dao.ItemDaoException;
 import com.javaeeee.dao.ProfileDAO;
 import com.javaeeee.dao.ProfileDaoException;
+import com.javaeeee.entities.Address;
 import com.javaeeee.entities.Item;
 import com.javaeeee.entities.Profile;
+import com.javaeeee.services.ProfileService;
+import java.text.DecimalFormat;
 
 public class GWListApi {
 
@@ -45,6 +50,32 @@ public class GWListApi {
 	
 	public void saveProfile(Profile profile, Datastore ds) throws ProfileDaoException {
 		profileDao.saveProfile(profile, ds);
+	}
+	
+	public boolean updateProfile(Profile profile) throws ProfileDaoException {
+		return profileDao.updateProfile(profile);
+	}
+	
+	public void deleteProfile(String userid) throws ProfileDaoException {
+		profileDao.deleteProfile(userid);
+	}
+	
+	public List<Profile> getTopFive(Datastore ds) throws ProfileDaoException {
+		
+		List<Profile> profiles = ds.find(Profile.class).order("-rating").asList();
+		
+		return ProfileService.getTopFive(profiles);
+		
+	}
+	
+	public String getDistance(String zip1, String zip2) throws Exception {
+		
+		DecimalFormat df = new DecimalFormat("#.0");
+		
+		double distance = Address.distance(zip1, zip2);
+		
+		return df.format(distance);
+		
 	}
 	
 	

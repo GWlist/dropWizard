@@ -25,8 +25,7 @@ public class FullStackProjectApplication extends Application<FullStackProjectCon
     @Override
     public void initialize(final Bootstrap<FullStackProjectConfiguration> bootstrap) {
  
-    	 // Call HTML page
-    	 AssetsBundle bundle = new AssetsBundle("/html", "/");
+    	 AssetsBundle bundle = new AssetsBundle("/html", "/", "index.html");
     	 bootstrap.addBundle(bundle);
 
     }
@@ -36,7 +35,7 @@ public class FullStackProjectApplication extends Application<FullStackProjectCon
                     final Environment environment) throws UnknownHostException {
     	
  
-    	MongoClient mongoClient = new MongoClient("localhost", 27017);
+    	MongoClient mongoClient = new MongoClient("192.168.137.129", 27017);
     	environment.lifecycle().manage(new MongoClientManager(mongoClient));
         environment.jersey().register(new ProfileResource(mongoClient));
         environment.jersey().register(new ItemResource(mongoClient));

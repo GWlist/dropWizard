@@ -9,11 +9,13 @@ public interface ProfileDAO  {
 	// need optional?
 	
 	Profile getProfile(String userid) throws ProfileDaoException;
+
+	boolean checkValidToken(String userid, String token);
 	
 	void saveProfile(Profile profile, Datastore ds) throws ProfileDaoException;
 	
 	boolean updateProfile(Profile profile) throws ProfileDaoException;
 	
-	public void deleteProfile(String userid) throws ProfileDaoException;
+	void deleteProfile(String userid) throws ProfileDaoException;
 	
 }

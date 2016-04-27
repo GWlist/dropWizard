@@ -1,12 +1,10 @@
 package com.javaeeee.FullStackProject;
 
-import java.net.UnknownHostException;
-
 import com.javaeeee.FullStackProject.resources.ItemResource;
+import com.javaeeee.FullStackProject.resources.LogInResource;
 import com.javaeeee.FullStackProject.resources.ProfileResource;
 import com.javaeeee.FullStackProject.utils.PropertiesReader;
 import com.mongodb.MongoClient;
-
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
@@ -43,6 +41,7 @@ public class FullStackProjectApplication extends Application<FullStackProjectCon
     	environment.lifecycle().manage(new MongoClientManager(mongoClient));
         environment.jersey().register(new ProfileResource(mongoClient));
         environment.jersey().register(new ItemResource(mongoClient));
+        environment.jersey().register(new LogInResource(mongoClient));
     }
 
 }

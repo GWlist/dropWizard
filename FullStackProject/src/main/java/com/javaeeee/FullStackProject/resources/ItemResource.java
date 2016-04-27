@@ -1,17 +1,19 @@
 package com.javaeeee.FullStackProject.resources;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.*;
-
 import com.javaeeee.FullStackProject.representations.ItemJson;
 import com.javaeeee.api.GWListApi;
-import com.javaeeee.dao.ItemDAOImpl;
-import com.javaeeee.dao.ItemDaoException;
-import com.javaeeee.dao.ItemDAO;
+import com.javaeeee.dao.*;
+import com.javaeeee.entities.Item;
+import com.javaeeee.entities.Profile;
 import com.mongodb.MongoClient;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
-import com.javaeeee.entities.Item;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 
 @Path("/items")
@@ -25,8 +27,8 @@ public class ItemResource {
 
 		datastore = new Morphia().createDatastore(mongoClient, "gwlist");
         ItemDAO itemDAO = new ItemDAOImpl(Item.class, datastore);
-        GWListApi api = new GWListApi(itemDAO);
-        this.api = api;
+		ProfileDAO profileDAO = new ProfileDAOImpl(Profile.class, datastore);
+        this.api = new GWListApi(profileDAO, itemDAO);
 	}
 
 	@GET
@@ -34,9 +36,15 @@ public class ItemResource {
 	  public Response getItem(@PathParam("itemid") String itemid) throws ItemDaoException {
 	    // retrieve information about the item with the provided id
 		//ItemDAO itemDAO = new ItemDAOImpl(Item.class, datastore);
-	    return Response
-	        .ok(api.getItem(itemid))
-	        .build();
+		String user = httpRequest.getHeader("user");
+		String token = httpRequest.getHeader("token");
+		if(api.checkValidToken(user, token)) {
+			return Response
+					.ok(api.getItem(itemid))
+					.build();
+		} else {
+			return Response.status(Response.Status.BAD_REQUEST).build();
+		}
 	  }
 
 	
@@ -44,7 +52,8 @@ public class ItemResource {
      http://localhost:9000/service/items/create
     */
 
-
+	@Context
+	protected HttpServletRequest httpRequest;
 
 	@POST
 	@Path("create")
@@ -82,7 +91,6 @@ public class ItemResource {
 	@Path("/{itemid}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response deleteItem(@PathParam("itemid") String itemid) throws ItemDaoException {
-		
 		api.deleteItem(itemid);
 		
 		return Response

@@ -1,6 +1,14 @@
 package com.javaeeee.FullStackProject;
 
-import static org.fest.assertions.api.Assertions.assertThat;
+import com.javaeeee.FullStackProject.representations.ItemJson;
+import com.javaeeee.FullStackProject.representations.ProfileJson;
+import com.javaeeee.entities.Address;
+import com.javaeeee.entities.Item;
+import com.javaeeee.entities.Profile;
+import io.dropwizard.testing.ResourceHelpers;
+import io.dropwizard.testing.junit.DropwizardAppRule;
+import org.junit.Before;
+import org.junit.ClassRule;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -8,18 +16,7 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Test;
-
-import com.javaeeee.FullStackProject.representations.ItemJson;
-import com.javaeeee.FullStackProject.representations.ProfileJson;
-import com.javaeeee.entities.Address;
-import com.javaeeee.entities.Item;
-import com.javaeeee.entities.Profile;
-
-import io.dropwizard.testing.ResourceHelpers;
-import io.dropwizard.testing.junit.DropwizardAppRule;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 
 // Test resources in web app
@@ -30,7 +27,7 @@ public class ApplicationTest {
 	
 	
 	private ItemJson item = new ItemJson(new Item("12", "Test Item", "Washington DC","20",100,1));
-	private ProfileJson testProfile = new ProfileJson(new Profile("24", "Mike", "Rothkopf",10,"555-555-5555","test@test.com", new Address("144 Elm St","McLean", "VA", "22102")));
+	private ProfileJson testProfile = new ProfileJson(new Profile("24", "1234", "Mike", "Rothkopf",10,"555-555-5555","test@test.com", new Address("144 Elm St","McLean", "VA", "22102")));
 	
 	@ClassRule
     public static final DropwizardAppRule<FullStackProjectConfiguration> RULE =

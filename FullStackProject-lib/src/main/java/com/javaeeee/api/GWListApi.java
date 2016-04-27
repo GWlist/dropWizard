@@ -1,9 +1,5 @@
 package com.javaeeee.api;
 
-import java.util.List;
-
-import org.mongodb.morphia.Datastore;
-
 import com.javaeeee.dao.ItemDAO;
 import com.javaeeee.dao.ItemDaoException;
 import com.javaeeee.dao.ProfileDAO;
@@ -12,7 +8,10 @@ import com.javaeeee.entities.Address;
 import com.javaeeee.entities.Item;
 import com.javaeeee.entities.Profile;
 import com.javaeeee.services.ProfileService;
+import org.mongodb.morphia.Datastore;
+
 import java.text.DecimalFormat;
+import java.util.List;
 
 public class GWListApi {
 
@@ -26,7 +25,16 @@ public class GWListApi {
 	public GWListApi(ProfileDAO dao) {
         this.profileDao = dao;
     }
-	
+
+	public GWListApi(ProfileDAO daoP, ItemDAO daoI) {
+		this.profileDao = daoP;
+		this.itemDao = daoI;
+	}
+
+	public boolean checkValidToken(String userid, String token) {
+		return profileDao.checkValidToken(userid, token);
+	}
+
 	public void deleteItem(String itemid) throws ItemDaoException {
 		itemDao.deleteItem(itemid);
 	}

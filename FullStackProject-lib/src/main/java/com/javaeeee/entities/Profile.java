@@ -8,15 +8,19 @@ public class Profile {
 
 	@Id
 	public final String userid;
+	public String password;
 	public final String firstName;
 	public final String lastName;
 	public final String phoneNumber;
 	public final String email;
 	public final Address address;
 	public final int rating;
+	public String token;
+	public Long lastAccess;
 	
 	public Profile() {
 	    this.userid= null;
+		this.password = null;
 	    this.firstName = null;
 	    this.lastName = null;
 	    this.rating = 0;
@@ -25,9 +29,10 @@ public class Profile {
 	    this.address = null;
 	  }
 	
-	public Profile(String userid, String firstName, String lastName,int rating, String phoneNumber, String email, Address address) {
+	public Profile(String userid, String password, String firstName, String lastName, int rating, String phoneNumber, String email, Address address) {
 	    this.userid= userid;
-	    this.firstName = firstName;
+		this.password = password;
+		this.firstName = firstName;
 	    this.lastName = lastName;
 	    this.rating = rating;
 	    this.phoneNumber = phoneNumber;
@@ -37,6 +42,10 @@ public class Profile {
 
 	public String getUserid() {
 		return userid;
+	}
+
+	public String getPassword() {
+		return password;
 	}
 
 	public String getFirstName() {
@@ -62,6 +71,24 @@ public class Profile {
 	public Address getAddress() {
 		return address;
 	}
-	
-	
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public Long getLastAccess() {
+		return lastAccess;
+	}
+
+	public void setLastAccess(Long lastAccess) {
+		this.lastAccess = lastAccess;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }

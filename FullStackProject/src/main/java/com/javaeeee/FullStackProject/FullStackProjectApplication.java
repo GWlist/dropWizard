@@ -4,12 +4,15 @@ import java.net.UnknownHostException;
 
 import com.javaeeee.FullStackProject.resources.ItemResource;
 import com.javaeeee.FullStackProject.resources.ProfileResource;
+import com.javaeeee.FullStackProject.utils.PropertiesReader;
 import com.mongodb.MongoClient;
 
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+
+import java.io.IOException;
 
 public class FullStackProjectApplication extends Application<FullStackProjectConfiguration> {
 
@@ -25,17 +28,18 @@ public class FullStackProjectApplication extends Application<FullStackProjectCon
     @Override
     public void initialize(final Bootstrap<FullStackProjectConfiguration> bootstrap) {
  
-    	 AssetsBundle bundle = new AssetsBundle("/html", "/", "index.html");
+    	 AssetsBundle bundle = new AssetsBundle("/html", "/");
     	 bootstrap.addBundle(bundle);
 
     }
 
     @Override
     public void run(final FullStackProjectConfiguration configuration,
-                    final Environment environment) throws UnknownHostException {
-    	
- 
-    	MongoClient mongoClient = new MongoClient("192.168.137.129", 27017);
+                    final Environment environment) throws IOException {
+
+        String serverAddress = PropertiesReader.getProperty("address");
+        int port = Integer.parseInt(PropertiesReader.getProperty("port"));
+    	MongoClient mongoClient = new MongoClient(serverAddress, port);
     	environment.lifecycle().manage(new MongoClientManager(mongoClient));
         environment.jersey().register(new ProfileResource(mongoClient));
         environment.jersey().register(new ItemResource(mongoClient));

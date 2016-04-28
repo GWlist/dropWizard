@@ -20,7 +20,7 @@ public class ProfileDAOImpl extends BasicDAO<Profile, String> implements Profile
 
 	public boolean checkValidToken(String userid, String token)  {
 		Profile p = get(userid);
-		return p.getSession().equals(token);
+		return p.getToken().equals(token);
 	}
 
 	public void saveProfile(Profile profile, Datastore ds) throws ProfileDaoException {

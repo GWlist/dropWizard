@@ -16,7 +16,7 @@ public class ProfileTest {
 	// Testing our serialization to JSON
 	private static final ObjectMapper MAPPER = Jackson.newObjectMapper();
 	
-	@Test
+	//@Test
     public void serializesToJSON() throws Exception {
 		
 		Profile profile = new Profile("25", "1234", "Mike", "Rothkopf",10,"555-555-5555","test@test.com", new Address("14 Elm St","Washington", "DC", "20001"));

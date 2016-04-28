@@ -4,6 +4,6 @@ import com.javaeeee.pojos.Session;
 
 public interface LogInDAO {
 
-    Session logIn(String username);
+    public Session logIn(String username);
 
 }

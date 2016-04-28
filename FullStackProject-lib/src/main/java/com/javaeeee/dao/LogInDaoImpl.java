@@ -16,7 +16,6 @@ public class LogInDaoImpl extends BasicDAO<Profile, String> implements LogInDAO 
         super(entityClass, ds);
     }
 
-    @Override
     public Session logIn(String username) {
         String token = UUID.randomUUID().toString().substring(0, 23);
         Long lastAccess = new Date().getTime();

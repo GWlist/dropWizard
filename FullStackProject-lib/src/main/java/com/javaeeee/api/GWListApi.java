@@ -80,7 +80,7 @@ public class GWListApi {
 		
 		DecimalFormat df = new DecimalFormat("#.0");
 		
-		double distance = Address.distance(zip1, zip2);
+		double distance = ProfileService.distance(zip1, zip2);
 		
 		return df.format(distance);
 		

@@ -28,7 +28,8 @@ public class ProfileTest {
     
     }
 	
-	// TODO: This test won't work with Address class included, need to customize
+	// TODO: Dropwizard compare fields test wont work for custom datatype.  Use application/resource
+    //tests instead to test deserialization.
 	//@Test
 	public void deserializesFromJSON() throws Exception {
 		

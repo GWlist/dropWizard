@@ -1,5 +1,7 @@
 package com.javaeeee.dao;
 
+import java.util.Optional;
+
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.dao.BasicDAO;
 
@@ -12,9 +14,18 @@ public class ProfileDAOImpl extends BasicDAO<Profile, String> implements Profile
         super(entityClass, ds);
     }
 	
-	public Profile getProfile(String userid) throws ProfileDaoException {
+	public Optional <Profile> getProfile(String userid) throws ProfileDaoException {
 		
-		return get(userid);
+		Profile profile = get(userid);
+		
+		if (profile != null) {
+		  
+			return Optional.of(profile);
+		}
+		else {
+			return Optional.empty();
+		}
+	    
 	}
 
 

@@ -1,6 +1,9 @@
 package com.javaeeee.dao;
 
 import com.javaeeee.entities.Item;
+
+import java.util.Optional;
+
 import org.mongodb.morphia.Datastore;
 
 
@@ -8,7 +11,7 @@ public interface ItemDAO  {
 
 	// need optional?
 	
-	Item getItem(String itemid) throws ItemDaoException;
+	public Optional<Item> getItem(String itemid) throws ItemDaoException;
 	
 	void saveItem(Item item, Datastore ds) throws ItemDaoException;
 	

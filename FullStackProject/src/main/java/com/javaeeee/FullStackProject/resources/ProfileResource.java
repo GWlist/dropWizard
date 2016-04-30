@@ -1,5 +1,7 @@
 package com.javaeeee.FullStackProject.resources;
 
+import java.util.Optional;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 
@@ -46,7 +48,7 @@ public class ProfileResource {
 	    // retrieve information about the profile with the provided id
 	    // ...
 	    return Response
-	        .ok(api.getProfile(userid))
+	        .ok(api.getProfile(userid).get())
 	        .build();
 	  }
 	  
@@ -55,10 +57,10 @@ public class ProfileResource {
 	  @Consumes(MediaType.APPLICATION_JSON)
 	  public Response getDistance(@PathParam("userid") String userid, @QueryParam("with") String otherUser) throws Exception {
 		  
-		  Profile profile1 = api.getProfile(userid);
-		  Profile profile2 = api.getProfile(otherUser);
+		  Optional<Profile> profile1 = api.getProfile(userid);
+		  Optional<Profile> profile2 = api.getProfile(otherUser);
 		  
-		  String distance = api.getDistance(profile1.getAddress().getZipcode(), profile2.getAddress().getZipcode());
+		  String distance = api.getDistance(profile1.get().getAddress().getZipcode(), profile2.get().getAddress().getZipcode());
 		  
 		  
 		  DistanceJson json = new DistanceJson(userid, otherUser, distance);

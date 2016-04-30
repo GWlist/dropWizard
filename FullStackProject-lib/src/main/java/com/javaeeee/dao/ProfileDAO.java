@@ -1,14 +1,16 @@
 package com.javaeeee.dao;
 
 import com.javaeeee.entities.Profile;
+
+import java.util.Optional;
+
 import org.mongodb.morphia.Datastore;
 
 
 public interface ProfileDAO  {
 
-	// need optional?
 	
-	Profile getProfile(String userid) throws ProfileDaoException;
+	public Optional <Profile> getProfile(String userid) throws ProfileDaoException;
 
 	boolean checkValidToken(String userid, String token);
 	

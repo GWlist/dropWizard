@@ -1,5 +1,7 @@
 package com.javaeeee.FullStackProject.representations;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.javaeeee.entities.Address;
 import com.javaeeee.entities.Profile;
@@ -15,6 +17,8 @@ public class ProfileJson {
 	private String email;
 	private int rating;
 	private Address address;
+	public String token;
+	public Long lastAccess;
 	
 	public ProfileJson(Profile p) {
 		this.userid = p.userid;
@@ -67,7 +71,16 @@ public class ProfileJson {
     public Address getAddress() {
 		return address;
 	}
+    @JsonIgnore
+	public String getToken() {
+		return token;
+	}
+    @JsonIgnore
+	public Long getLastAccess() {
+		return lastAccess;
+	}
 
+	
 	
 	
 }

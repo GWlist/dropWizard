@@ -1,5 +1,7 @@
 package com.javaeeee.dao;
 
+import java.util.Optional;
+
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
@@ -7,6 +9,7 @@ import org.mongodb.morphia.query.UpdateOperations;
 import org.mongodb.morphia.query.UpdateResults;
 
 import com.javaeeee.entities.Item;
+import com.javaeeee.entities.Profile;
 
 public class ItemDAOImpl extends BasicDAO<Item, String> implements ItemDAO {
 
@@ -15,8 +18,18 @@ public class ItemDAOImpl extends BasicDAO<Item, String> implements ItemDAO {
         super(entityClass, ds);
     }
 	
-	public Item getItem(String itemid) throws ItemDaoException {
-		return get(itemid);
+	public Optional<Item> getItem(String itemid) throws ItemDaoException {
+		
+		Item item = get(itemid);
+		
+		if (item != null) {
+			return Optional.of(item);
+		}
+		else {
+			return Optional.empty();
+		}
+		
+	
 	}
 
 	public void saveItem(Item item, Datastore ds) throws ItemDaoException {

@@ -40,7 +40,7 @@ public class ItemResource {
 		String token = httpRequest.getHeader("token");
 		if(api.checkValidToken(user, token)) {
 			return Response
-					.ok(api.getItem(itemid))
+					.ok(api.getItem(itemid).get())
 					.build();
 		} else {
 			return Response.status(Response.Status.BAD_REQUEST).build();

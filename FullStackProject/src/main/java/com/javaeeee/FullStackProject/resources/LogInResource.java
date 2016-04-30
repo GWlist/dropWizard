@@ -10,6 +10,8 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 
+import java.util.Optional;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -37,9 +39,11 @@ public class LogInResource {
     @Path("/{userid}/{password}")
     public Response logIn(@PathParam("userid") String userid, @PathParam("password") String password) throws ProfileDaoException {
         // retrieve information about the profile with the provided id
-        Profile user = api.getProfile(userid);
+        Optional<Profile> user = api.getProfile(userid);
 
-        if(BCrypt.hashpw(password, user.getPassword()).equals(user.getPassword())){
+        
+        
+        if(BCrypt.hashpw(password, user.get().getPassword()).equals(user.get().getPassword())){
             //create Session
             return Response
                     .ok(loginApi.logIn(userid))

@@ -12,6 +12,7 @@ import org.mongodb.morphia.Datastore;
 
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Optional;
 
 public class GWListApi {
 
@@ -40,7 +41,7 @@ public class GWListApi {
 	}
 	
 	
-	public Item getItem(String itemid) throws ItemDaoException {
+	public Optional<Item> getItem(String itemid) throws ItemDaoException {
         return itemDao.getItem(itemid);
     }
 	
@@ -52,7 +53,7 @@ public class GWListApi {
 		return itemDao.updateItem(item);
 	}
 	
-	public Profile getProfile(String userid) throws ProfileDaoException {
+	public Optional<Profile> getProfile(String userid) throws ProfileDaoException {
 		return profileDao.getProfile(userid);
 	}
 	
@@ -68,11 +69,9 @@ public class GWListApi {
 		profileDao.deleteProfile(userid);
 	}
 	
-	public List<Profile> getTopFive(Datastore ds) throws ProfileDaoException {
+	public Profile getTopUser(Datastore ds) throws ProfileDaoException {
 		
-		List<Profile> profiles = ds.find(Profile.class).order("-rating").asList();
-		
-		return ProfileService.getTopFive(profiles);
+		return ProfileService.getTopUser(ds);
 		
 	}
 	

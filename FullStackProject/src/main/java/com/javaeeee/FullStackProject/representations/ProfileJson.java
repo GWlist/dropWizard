@@ -15,7 +15,6 @@ public class ProfileJson {
 	private String lastName;
 	private String phoneNumber;
 	private String email;
-	private int rating;
 	private Address address;
 	public String token;
 	public Long lastAccess;
@@ -27,14 +26,13 @@ public class ProfileJson {
 		this.lastName = p.lastName;
 		this.phoneNumber = p.phoneNumber;
 		this.email = p.email;
-		this.rating = p.rating;
 		this.address = p.address;
 	}
 	
 	public ProfileJson() {}
 	
 	public Profile asProfile() {
-		return new Profile(userid, password, firstName, lastName, rating, phoneNumber, email, new Address(address.toString()));
+		return new Profile(userid, password, firstName, lastName, phoneNumber, email, new Address(address.toString()));
 	}
 	
 	
@@ -54,10 +52,6 @@ public class ProfileJson {
     @JsonProperty
 	public String getLastName() {
 		return lastName;
-	}
-    @JsonProperty
-	public int getRating() {
-		return rating;
 	}
     @JsonProperty
 	public String getPhoneNumber() {

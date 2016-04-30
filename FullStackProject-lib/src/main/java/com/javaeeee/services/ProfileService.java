@@ -3,7 +3,10 @@ package com.javaeeee.services;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -12,19 +15,66 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
+import org.mongodb.morphia.Datastore;
 import org.w3c.dom.Document;
 
+import com.javaeeee.entities.Item;
 import com.javaeeee.entities.Profile;
 
 public class ProfileService {
 
 	
-	public static List<Profile> getTopFive(List<Profile> profiles) {
+	public static Profile getTopUser(Datastore ds) {
 		
-		// Add logic to find top 5 and compare it to numSold, etc.
+		Map<Profile, Integer> profileRating = new HashMap<Profile, Integer>();
+		
+		List<Profile> profiles = ds.find(Profile.class).asList();
 		
 		
-		return profiles;
+		for (int i = 0;i<profiles.size();i++) {
+			
+			List<Item> profileItems = ds.find(Item.class, "userid =", profiles.get(i).getUserid()).asList();
+			
+			
+			int ratings = 0;
+			int totalSold = 0;
+			
+			for (int a = 0;a<profileItems.size();a++) {
+				
+				if (profileItems.get(a).getNumSold() == 0) {
+				  totalSold = totalSold + 1;
+				  ratings = ratings + profileItems.get(a).getRating();
+				}
+			}
+			
+			if (totalSold > 0) {
+			  profileRating.put(profiles.get(i), ratings/totalSold);
+			}
+			else {
+			  profileRating.put(profiles.get(i), 0);
+			}
+			
+			
+			
+		}
+		
+		int index = 0;
+		int currentHigh = 0;
+		
+		for (int p=0;p<profiles.size();p++) {
+		   
+			if (profileRating.get(profiles.get(p)) > currentHigh) {
+			  index = p;
+			  currentHigh = profileRating.get(profiles.get(p));
+			}
+			
+		}
+		
+		return profiles.get(index);
+		
+		
+		
+	
 		
 	}
 	

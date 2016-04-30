@@ -4,6 +4,7 @@
     "location": "Washington DC",
     "userid": "20",
     "price": 100,
-    "numSold": 1
+    "numSold": 1,
+    "rating":5
     
 }

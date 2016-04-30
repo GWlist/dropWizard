@@ -8,6 +8,7 @@ public class ItemJson {
 	private String name;
 	private int price;
 	private int numSold;
+	private int rating;
 	private String location;
 	private String userid;
 	
@@ -19,12 +20,13 @@ public class ItemJson {
 		this.numSold = item.numSold;
 		this.location = item.location;
 		this.userid = item.userid;
+		this.rating = item.rating;
 	}
 	
 	public ItemJson() {}
 	
 	public Item asItem() {
-		return new Item(itemid, name, location, userid, price, numSold);
+		return new Item(itemid, name, location, userid, price, numSold, rating);
 	}
 	
     @JsonProperty
@@ -51,7 +53,10 @@ public class ItemJson {
 	public String getUserid() {
 		return userid;
 	}
-	
+    @JsonProperty
+	public int getRating() {
+		return rating;
+	}
 	
 	
 }

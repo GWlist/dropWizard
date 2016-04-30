@@ -53,6 +53,16 @@ public class ProfileResource {
 	  }
 	  
 	  @GET
+	  @Path("/topUser")
+	  public Response getProfile() throws ProfileDaoException {
+	    // retrieve information about the profile with the provided id
+	    // ...
+	    return Response
+	        .ok(api.getTopUser(datastore))
+	        .build();
+	  }
+	  
+	  @GET
 	  @Path("/{userid}/distance")
 	  @Consumes(MediaType.APPLICATION_JSON)
 	  public Response getDistance(@PathParam("userid") String userid, @QueryParam("with") String otherUser) throws Exception {

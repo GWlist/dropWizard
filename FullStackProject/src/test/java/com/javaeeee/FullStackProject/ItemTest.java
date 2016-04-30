@@ -19,7 +19,7 @@ public class ItemTest {
 	
 	@Test
     public void serializesToJSON() throws Exception {
-		Item item = new Item("12", "Test Item", "Washington DC","20",100,1);
+		Item item = new Item("12", "Test Item", "Washington DC","20",100,1,5);
         final ItemJson json = new ItemJson(item);
         String jacksonJSON = MAPPER.writeValueAsString(json);
 		String jsonFixture = MAPPER.writeValueAsString(MAPPER.readValue(fixture("fixtures/item.json"), ItemJson.class));
@@ -30,7 +30,7 @@ public class ItemTest {
 	@Test
 	public void deserializesFromJSON() throws Exception {
 		
-		Item item = new Item("12", "Test Item", "Washington DC","20",100,1);
+		Item item = new Item("12", "Test Item", "Washington DC","20",100,1,5);
 		final ItemJson json = new ItemJson(item);
 		assertThat(MAPPER.readValue(fixture("fixtures/item.json"), ItemJson.class))
         .isEqualsToByComparingFields(json);

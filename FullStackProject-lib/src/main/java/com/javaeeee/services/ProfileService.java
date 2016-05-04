@@ -47,7 +47,8 @@ public class ProfileService {
 				}
 			}
 			
-			if (totalSold > 0) {
+			// Don't use sellers that have sold 0 or only 1 item
+			if (totalSold > 1) {
 			  profileRating.put(profiles.get(i), ratings/totalSold);
 			}
 			else {

@@ -98,6 +98,17 @@ public class ItemResource {
 			      .build();
 		
 	}
+
+	@GET
+	@Path("search/{name}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response searchItemByName(@PathParam("name") String itemName) throws ItemDaoException {
+
+		return Response
+				.ok(api.searchItemsByName(itemName))
+				.build();
+
+	}
 	
 	
 }

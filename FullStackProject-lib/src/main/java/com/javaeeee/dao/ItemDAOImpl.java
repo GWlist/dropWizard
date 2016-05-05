@@ -1,15 +1,15 @@
 package com.javaeeee.dao;
 
-import java.util.Optional;
-
+import com.javaeeee.entities.Item;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.QueryResults;
 import org.mongodb.morphia.query.UpdateOperations;
 import org.mongodb.morphia.query.UpdateResults;
 
-import com.javaeeee.entities.Item;
-import com.javaeeee.entities.Profile;
+import java.util.List;
+import java.util.Optional;
 
 public class ItemDAOImpl extends BasicDAO<Item, String> implements ItemDAO {
 
@@ -40,6 +40,13 @@ public class ItemDAOImpl extends BasicDAO<Item, String> implements ItemDAO {
 	public void deleteItem(String itemid) throws ItemDaoException {
 		 
 		getDatastore().delete(itemid);
+	}
+
+	@Override
+	public List<Item> searchItemsByName(String itemName) throws ItemDaoException {
+		Query<Item> q = createQuery().field("name").containsIgnoreCase(itemName);
+		QueryResults<Item> items = find(q);
+		return items.asList();
 	}
 
 	public boolean updateItem(Item item) throws ItemDaoException {

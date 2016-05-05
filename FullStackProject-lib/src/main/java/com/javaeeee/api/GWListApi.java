@@ -4,7 +4,6 @@ import com.javaeeee.dao.ItemDAO;
 import com.javaeeee.dao.ItemDaoException;
 import com.javaeeee.dao.ProfileDAO;
 import com.javaeeee.dao.ProfileDaoException;
-import com.javaeeee.entities.Address;
 import com.javaeeee.entities.Item;
 import com.javaeeee.entities.Profile;
 import com.javaeeee.services.ProfileService;
@@ -38,6 +37,10 @@ public class GWListApi {
 
 	public void deleteItem(String itemid) throws ItemDaoException {
 		itemDao.deleteItem(itemid);
+	}
+
+	public List<Item> searchItemsByName(String itemName) throws ItemDaoException {
+		return itemDao.searchItemsByName(itemName);
 	}
 	
 	

@@ -28,7 +28,7 @@ public class ApplicationTest {
 	
 	
 	private ItemJson item = new ItemJson(new Item("12", "Test Item", "Washington DC","20",100,0,5));
-	private ProfileJson testProfile = new ProfileJson(new Profile("22", "1234", "Mike", "Rothkopf","555-555-5555","test@test.com", new Address("144 Elm St","McLean", "VA", "22102")));
+	private ProfileJson testProfile = new ProfileJson(new Profile("29", "1234", "Mike", "Rothkopf","555-555-5555","test@test.com", new Address("144 Elm St","Washington", "DC", "20001")));
 	
 	@ClassRule
     public static final DropwizardAppRule<FullStackProjectConfiguration> RULE =
@@ -41,7 +41,7 @@ public class ApplicationTest {
     }
 	
 	
-	//@Test
+	@Test
 	public void createandRetrieveProfile() {
 		
 		// Test profile creation
@@ -60,7 +60,7 @@ public class ApplicationTest {
 		assertThat(profTest.getFirstName()).isEqualTo(testProfile.getFirstName());
 	}
 	
-	@Test
+	//@Test
     public void createAndRetrieveItem() {
       
 		// First test that the post is working

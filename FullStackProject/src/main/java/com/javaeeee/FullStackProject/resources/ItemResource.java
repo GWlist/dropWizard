@@ -36,15 +36,15 @@ public class ItemResource {
 	  public Response getItem(@PathParam("itemid") String itemid) throws ItemDaoException {
 	    // retrieve information about the item with the provided id
 		//ItemDAO itemDAO = new ItemDAOImpl(Item.class, datastore);
-		String user = httpRequest.getHeader("user");
-		String token = httpRequest.getHeader("token");
-		if(api.checkValidToken(user, token)) {
+		/*String user = httpRequest.getHeader("user");
+		String token = httpRequest.getHeader("token");*/
+		//if(api.checkValidToken(user, token)) {
 			return Response
 					.ok(api.getItem(itemid).get())
 					.build();
-		} else {
+		/*} else {
 			return Response.status(Response.Status.BAD_REQUEST).build();
-		}
+		}*/
 	  }
 
 	

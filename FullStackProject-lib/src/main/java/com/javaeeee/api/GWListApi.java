@@ -42,7 +42,10 @@ public class GWListApi {
 	public List<Item> searchItemsByName(String itemName) throws ItemDaoException {
 		return itemDao.searchItemsByName(itemName);
 	}
-	
+
+	public List<Item> findAllItems() throws ItemDaoException {
+		return itemDao.findAll();
+	}
 	
 	public Optional<Item> getItem(String itemid) throws ItemDaoException {
         return itemDao.getItem(itemid);

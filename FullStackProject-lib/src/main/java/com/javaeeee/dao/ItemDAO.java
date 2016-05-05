@@ -19,4 +19,6 @@ public interface ItemDAO  {
 	void deleteItem(String itemid) throws ItemDaoException;
 
 	List<Item> searchItemsByName(String itemName) throws ItemDaoException;
+
+	List<Item> findAll() throws ItemDaoException;
 }

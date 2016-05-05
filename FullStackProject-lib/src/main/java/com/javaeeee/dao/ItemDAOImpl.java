@@ -44,9 +44,15 @@ public class ItemDAOImpl extends BasicDAO<Item, String> implements ItemDAO {
 
 	@Override
 	public List<Item> searchItemsByName(String itemName) throws ItemDaoException {
-		Query<Item> q = createQuery().field("name").containsIgnoreCase(itemName);
+		Query<Item> q = createQuery().field("name").containsIgnoreCase(itemName).field("numSold").greaterThan(0);
 		QueryResults<Item> items = find(q);
 		return items.asList();
+	}
+
+	@Override
+	public List<Item> findAll() throws ItemDaoException {
+		Query<Item> q = createQuery().field("numSold").greaterThan(0);
+		return find(q).asList();
 	}
 
 	public boolean updateItem(Item item) throws ItemDaoException {
